@@ -1,29 +1,35 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-args: ['build', '-t', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/$
-{_IMAGE}:${_TAG}', '.']
-- name: 'gcr.io/cloud-builders/docker'
-args: ['push', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:$
-{_TAG}']
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-entrypoint: gcloud
-args:
-- run
-- deploy
-- ${_SERVICE_NAME}
-- '--image=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:$
-{_TAG}'
-- '--platform=managed'
-- '--region=${_REGION}'
-- '--allow-unauthenticated'
-- '--set-env-vars=BUCKET_NAME=${_BUCKET_NAME}'
-6
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:${_TAG}'
+      - '.'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:${_TAG}'
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - '${_SERVICE_NAME}'
+      - '--image=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:${_TAG}'
+      - '--platform=managed'
+      - '--region=${_REGION}'
+      - '--allow-unauthenticated'
+      - '--set-env-vars=BUCKET_NAME=${_BUCKET_NAME}'
+
 substitutions:
-_REGION: us-central1
-_REPO: HireBot
-_IMAGE: HireBot
-_TAG: v1
-_SERVICE_NAME: HireBot
-_BUCKET_NAME:  cblabs-dev-sbkt01
+  _REGION: 'us-central1'
+  _REPO: 'hirebot'
+  _IMAGE: 'hirebot'
+  _TAG: 'v1'
+  _SERVICE_NAME: 'hirebot'
+  _BUCKET_NAME: 'cblabs-dev-sbkt01'
+
 options:
-logging: CLOUD_LOGGING_ONLY
+  logging: CLOUD_LOGGING_ONLY

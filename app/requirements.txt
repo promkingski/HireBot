@@ -3,3 +3,4 @@ uvicorn
 google-cloud-storage
 google-genai>=1.38.0
 python-multipart
+PyPDF2

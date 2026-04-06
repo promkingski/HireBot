@@ -33,15 +33,22 @@ def upload_to_gcs(data: bytes, filename: str) -> str:
 
 def summarise_text(text: str) -> str:
     if USE_VERTEX:
-        import vertexai
-        from vertexai.generative_models import GenerativeModel
-        vertexai.init(project=os.environ.get("GOOGLE_CLOUD_PROJECT"), 
-                      location="us-central1")
-        model = GenerativeModel("gemini-1.5-flash-001")
-        response = model.generate_content(
-            f"Summarize the following text in 2-3 sentences:\n\n{text}"
-        )
-        return response.text.strip()
+        try:
+            client = genai.Client(
+                http_options=HttpOptions(api_version="v1"),
+                vertexai=True
+            )
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=f"Summarize the following text in 2-3 sentences:\n\n{text}"
+            )
+            return response.text.strip()
+        except Exception as e:
+            import logging
+            logging.error(f"Vertex AI call failed: {e}")
+            # Fall back to simple summary
+            sentences = text.split(".")
+            return ".".join(sentences[:2]).strip() + "."
     else:
         sentences = text.split(".")
         return ".".join(sentences[:2]).strip() + "."

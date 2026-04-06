@@ -8,7 +8,7 @@ from google.cloud import storage
 # Optional: import Vertex AI client
 try:
     from vertexai.preview.language_models import TextGenerationModel
-    USE_VERTEX = True
+    USE_VERTEX = False
 except ImportError:
     USE_VERTEX = False
 

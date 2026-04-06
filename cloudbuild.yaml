@@ -1,0 +1,29 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+args: ['build', '-t', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/$
+{_IMAGE}:${_TAG}', '.']
+- name: 'gcr.io/cloud-builders/docker'
+args: ['push', '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:$
+{_TAG}']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+entrypoint: gcloud
+args:
+- run
+- deploy
+- ${_SERVICE_NAME}
+- '--image=${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:$
+{_TAG}'
+- '--platform=managed'
+- '--region=${_REGION}'
+- '--allow-unauthenticated'
+- '--set-env-vars=BUCKET_NAME=${_BUCKET_NAME}'
+6
+substitutions:
+_REGION: us-central1
+_REPO: demo-repo
+_IMAGE: mission-log-analyzer
+_TAG: latest
+_SERVICE_NAME: mission-log-analyzer
+_BUCKET_NAME: your-gcs-bucket-name
+options:
+logging: CLOUD_LOGGING_ONLY

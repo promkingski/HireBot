@@ -27,7 +27,7 @@ steps:
 
 substitutions:
   _REGION: 'us-central1'
-  _REPO: 'hirebot'
+  _REPO: 'docker-repo01'
   _IMAGE: 'hirebot'
   _TAG: 'v1'
   _SERVICE_NAME: 'hirebot'

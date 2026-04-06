@@ -31,16 +31,17 @@ def upload_to_gcs(data: bytes, filename: str) -> str:
 
 
 def summarise_text(text: str) -> str:
-    """
-    Summarises text using Vertex AI if available; otherwise a simple local
-    method.
-    """
     if USE_VERTEX:
-        model = TextGenerationModel.from_pretrained("text-bison@001")
-        response = model.predict(text, max_output_tokens=128)
+        import vertexai
+        from vertexai.generative_models import GenerativeModel
+        vertexai.init(project=os.environ.get("GOOGLE_CLOUD_PROJECT"), 
+                      location="us-central1")
+        model = GenerativeModel("gemini-1.5-flash-001")
+        response = model.generate_content(
+            f"Summarize the following text in 2-3 sentences:\n\n{text}"
+        )
         return response.text.strip()
     else:
-        # Simple fallback: return the first 2 sentences as a pseudo-summary
         sentences = text.split(".")
         return ".".join(sentences[:2]).strip() + "."
 

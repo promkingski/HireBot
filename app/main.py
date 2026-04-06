@@ -7,8 +7,9 @@ from google.cloud import storage
 
 # Optional: import Vertex AI client
 try:
-    from vertexai.preview.language_models import TextGenerationModel
-    USE_VERTEX = False
+    from google import genai
+    from google.genai.types import HttpOptions
+    USE_VERTEX = True
 except ImportError:
     USE_VERTEX = False
 

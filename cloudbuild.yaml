@@ -20,10 +20,10 @@ args:
 6
 substitutions:
 _REGION: us-central1
-_REPO: demo-repo
-_IMAGE: mission-log-analyzer
-_TAG: latest
-_SERVICE_NAME: mission-log-analyzer
-_BUCKET_NAME: your-gcs-bucket-name
+_REPO: HireBot
+_IMAGE: HireBot
+_TAG: v1
+_SERVICE_NAME: HireBot
+_BUCKET_NAME:  cblabs-dev-sbkt01
 options:
 logging: CLOUD_LOGGING_ONLY

@@ -1,6 +1,10 @@
 import os
 from typing import List
 
+import io
+from PyPDF2 import PdfReader
+
+
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import HTMLResponse, JSONResponse
 from google.cloud import storage
@@ -30,7 +34,16 @@ def upload_to_gcs(data: bytes, filename: str) -> str:
     blob.upload_from_string(data)
     return f"gs://{BUCKET_NAME}/{filename}"
 
-
+def extract_text(content: bytes, filename: str) -> str:
+    if filename.lower().endswith(".pdf"):
+        reader = PdfReader(io.BytesIO(content))
+        text = ""
+        for page in reader.pages:
+            text += page.extract_text() or ""
+        return text.strip()
+    else:
+        return content.decode("utf-8", errors="ignore")
+        
 def summarise_text(text: str) -> str:
     if USE_VERTEX:
         try:
@@ -79,7 +92,7 @@ async def analyze(files: List[UploadFile] = File(...)):
     for file in files:
         content = await file.read()
         gcs_uri = upload_to_gcs(content, file.filename)
-        text = content.decode("utf-8", errors="ignore")
+        text = extract_text(content, file.filename)
         summary = summarise_text(text)
 
         results.append(

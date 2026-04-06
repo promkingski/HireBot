@@ -5,7 +5,7 @@ steps:
       - '-t'
       - '${_REGION}-docker.pkg.dev/${PROJECT_ID}/${_REPO}/${_IMAGE}:${_TAG}'
       - '-f'
-      - 'app/dockerfile'
+      - 'app/Dockerfile'
       - 'app'
 
   - name: 'gcr.io/cloud-builders/docker'

@@ -61,6 +61,9 @@ async def index():
     </html>
     """
 
+@app.get("/debug")
+async def debug():
+    return {"USE_VERTEX": USE_VERTEX}
 
 @app.post("/analyze")
 async def analyze(files: List[UploadFile] = File(...)):

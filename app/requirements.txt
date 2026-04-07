@@ -1,6 +1,7 @@
 fastapi
 uvicorn
 google-cloud-storage
-google-genai>=1.38.0
+google-genai
+jinja2
 python-multipart
 PyPDF2

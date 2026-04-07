@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Analyzer{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="section-header">
+    <h2>Mission Log Analyzer</h2>
+    <p>Upload documents for AI-powered summarization using Gemini 2.5 Flash on Vertex AI</p>
+  </div>
+
+  <div class="upload-zone" id="uploadZone" onclick="document.getElementById('fileInput').click()">
+    <div class="upload-zone-icon">📄</div>
+    <div class="upload-zone-text">Drop files here or click to browse</div>
+    <div class="upload-zone-hint">Supports .txt and .pdf files</div>
+    <input type="file" id="fileInput" multiple accept=".txt,.pdf" style="display: none;" onchange="handleFiles(this.files)">
+  </div>
+
+  <div class="file-list" id="fileList"></div>
+
+  <div style="margin-top: 16px; text-align: right;">
+    <button class="btn btn-primary" id="analyzeBtn" onclick="analyzeFiles()" disabled>
+      Analyze Files
+    </button>
+  </div>
+
+  <div class="results-area" id="resultsArea"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let selectedFiles = [];
+
+const zone = document.getElementById('uploadZone');
+zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('dragover'); });
+zone.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+zone.addEventListener('drop', e => {
+  e.preventDefault();
+  zone.classList.remove('dragover');
+  handleFiles(e.dataTransfer.files);
+});
+
+function handleFiles(files) {
+  for (const f of files) {
+    if (!selectedFiles.find(s => s.name === f.name)) {
+      selectedFiles.push(f);
+    }
+  }
+  renderFileList();
+}
+
+function removeFile(idx) {
+  selectedFiles.splice(idx, 1);
+  renderFileList();
+}
+
+function renderFileList() {
+  const list = document.getElementById('fileList');
+  const btn = document.getElementById('analyzeBtn');
+  btn.disabled = selectedFiles.length === 0;
+
+  if (selectedFiles.length === 0) {
+    list.innerHTML = '';
+    return;
+  }
+  list.innerHTML = selectedFiles.map((f, i) => `
+    <div class="file-item">
+      <span class="name">${f.name}</span>
+      <span class="size">${(f.size / 1024).toFixed(1)} KB</span>
+      <button class="remove" onclick="removeFile(${i})">✕</button>
+    </div>
+  `).join('');
+}
+
+async function analyzeFiles() {
+  if (selectedFiles.length === 0) return;
+
+  const btn = document.getElementById('analyzeBtn');
+  const results = document.getElementById('resultsArea');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Analyzing...';
+  results.innerHTML = '';
+
+  const formData = new FormData();
+  selectedFiles.forEach(f => formData.append('files', f));
+
+  try {
+    const resp = await fetch('/analyze', { method: 'POST', body: formData });
+    const data = await resp.json();
+
+    results.innerHTML = '<div class="section-header" style="margin-top: 8px;"><h2>Results</h2></div>' +
+      data.results.map(r => `
+        <div class="card result-card">
+          <div class="result-filename">${r.filename}</div>
+          <div class="result-summary">${r.summary}</div>
+          <div class="result-uri">${r.gcs_uri}</div>
+        </div>
+      `).join('');
+  } catch (err) {
+    results.innerHTML = `<div class="card"><div class="card-text" style="color: var(--danger);">Error: ${err.message}</div></div>`;
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Analyze Files';
+  }
+}
+</script>
+{% endblock %}

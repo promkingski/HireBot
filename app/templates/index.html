@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="hero">
+    <span class="hero-badge">Proof of Execution</span>
+    <h1>Secure Agentic AI Platform<br><span class="accent">on Google Cloud</span></h1>
+    <p>A reference implementation demonstrating rapid GCP ramp-up, secure architecture for regulated environments, and multi-cloud fluency — built for the V2X Senior Principal Agentic Platform Engineer role.</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="card stat">
+      <div class="stat-value">14</div>
+      <div class="stat-unit">days</div>
+      <div class="stat-label">Ramp-up timeline</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-value">6+</div>
+      <div class="stat-unit">services</div>
+      <div class="stat-label">GCP services integrated</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-value">3</div>
+      <div class="stat-unit">clouds</div>
+      <div class="stat-label">Azure · AWS · GCP</div>
+    </div>
+    <div class="card stat">
+      <div class="stat-value">100%</div>
+      <div class="stat-unit">IaC</div>
+      <div class="stat-label">Fully automated deploy</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 20px;">
+    <div class="card-title">Mission Log Analyzer</div>
+    <div class="card-text">
+      The demo app is a containerized FastAPI service deployed on Cloud Run. Users upload mission log files or documents which are stored in Cloud Storage, then summarized using Gemini 2.5 Flash on Vertex AI. The entire pipeline — build, push, deploy — is automated via Cloud Build with a single <code style="background: var(--accent-dim); padding: 2px 6px; border-radius: 4px; font-size: 12px; color: var(--accent); font-family: var(--font-mono);">cloudbuild.yaml</code>.
+      <br><br>
+      <a href="/analyzer" class="btn btn-primary btn-sm">Try the Analyzer →</a>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom: 20px;">
+    <div class="card-title">AI Career Assistant</div>
+    <div class="card-text">
+      The chatbot on the "Ask Me Anything" tab is powered by Gemini and loaded with context about my background, skills, and approach. Hiring managers can ask questions about how I'd handle specific scenarios, my architecture philosophy, or my experience with regulated environments.
+      <br><br>
+      <a href="/chat" class="btn btn-outline btn-sm">Ask a Question →</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Why This Project</div>
+    <div class="card-text">
+      V2X partnered with Google Public Sector in February 2026 to deliver secure AI solutions for U.S. government missions. This project proves I can ramp on GCP quickly, design for compliance (NIST RMF, FedRAMP, CMMC 2.0), and bridge my Azure/AWS experience into GCP's ecosystem.
+    </div>
+  </div>
+</div>
+{% endblock %}

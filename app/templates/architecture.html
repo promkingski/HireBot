@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %}Architecture{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="section-header">
+    <h2>Reference Architecture</h2>
+    <p>How the Mission Log Analyzer is structured on Google Cloud Platform</p>
+  </div>
+
+  <div class="arch-grid">
+    <div class="card">
+      <div class="arch-card">
+        <div class="arch-icon">🌐</div>
+        <div>
+          <div class="arch-title">Cloud Run</div>
+          <div class="arch-subtitle">Frontend + API</div>
+          <div class="arch-desc">Containerized FastAPI serving both the UI and REST endpoints. Auto-scales to zero, pay-per-request. Hosts the analyzer, chatbot, and admin interface.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="arch-card">
+        <div class="arch-icon">🪣</div>
+        <div>
+          <div class="arch-title">Cloud Storage</div>
+          <div class="arch-subtitle">File + Knowledge Store</div>
+          <div class="arch-desc">Regional bucket with IAM-scoped access. Uploaded mission logs and chatbot knowledge documents are stored here.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="arch-card">
+        <div class="arch-icon">🧠</div>
+        <div>
+          <div class="arch-title">Gemini 2.5 Flash</div>
+          <div class="arch-subtitle">AI Engine (Vertex AI)</div>
+          <div class="arch-desc">Powers both the document summarization and the career chatbot. Context-loaded with knowledge documents for personalized responses.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="arch-card">
+        <div class="arch-icon">🔐</div>
+        <div>
+          <div class="arch-title">Secret Manager</div>
+          <div class="arch-subtitle">Credential Vault</div>
+          <div class="arch-desc">API keys and service credentials injected as env vars at deploy time. No secrets in code or containers.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="arch-card">
+        <div class="arch-icon">📊</div>
+        <div>
+          <div class="arch-title">Cloud Logging</div>
+          <div class="arch-subtitle">Observability</div>
+          <div class="arch-desc">Request logs, latencies, errors. Optional BigQuery export via Log Sinks for longer-term analytics.</div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="arch-card">
+        <div class="arch-icon">🏗️</div>
+        <div>
+          <div class="arch-title">Cloud Build</div>
+          <div class="arch-subtitle">CI/CD Pipeline</div>
+          <div class="arch-desc">GitHub-connected trigger. Every push to main rebuilds the container, pushes to Artifact Registry, and redeploys to Cloud Run.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 24px;">
+    <div class="card-title">Data Flow</div>
+    <div class="data-flow">
+      <span class="node">User</span>
+      <span class="arrow"> → </span>
+      <span class="node">Cloud Run (FastAPI)</span>
+      <span class="arrow"> → </span>
+      <span class="node">Cloud Storage</span>
+      <span class="arrow"> → </span>
+      <span class="node">Gemini 2.5 Flash</span>
+      <span class="arrow"> → </span>
+      <span class="node">JSON Response</span>
+      <br>
+      <span style="color: var(--text-dim);">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── </span>
+      <span class="node">Cloud Logging</span>
+      <span class="arrow"> → </span>
+      <span class="node">Cloud Monitoring</span>
+      <span class="arrow"> → </span>
+      <span class="node">BigQuery (optional)</span>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top: 24px;">
+    <div class="card-title">Azure → GCP Translation</div>
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 12px;">
+        <thead>
+          <tr style="border-bottom: 2px solid var(--border);">
+            <th style="text-align: left; padding: 8px 12px; color: var(--accent); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;">Azure</th>
+            <th style="text-align: left; padding: 8px 12px; color: var(--accent); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;">GCP Equivalent</th>
+            <th style="text-align: left; padding: 8px 12px; color: var(--accent); font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;">Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% set rows = [
+            ("App Service / Functions", "Cloud Run / Cloud Functions", "Container hosting vs event-driven"),
+            ("Azure Blob Storage", "Cloud Storage", "Object storage with regional options"),
+            ("Azure Key Vault", "Secret Manager", "Centralized credential management"),
+            ("Azure Monitor", "Cloud Logging + Monitoring", "Unified observability stack"),
+            ("Azure DevOps", "Cloud Build", "CI/CD with native GCP integration"),
+            ("Azure VNet", "VPC + Private Service Access", "Network isolation and firewalls"),
+            ("Azure Policy", "Org Policy + Assured Workloads", "Compliance guardrails"),
+            ("Azure OpenAI", "Vertex AI (Gemini)", "Managed LLM endpoints"),
+            ("Azure Event Hub", "Pub/Sub", "Async event streaming"),
+            ("AKS", "GKE / Cloud Run", "Container orchestration")
+          ] %}
+          {% for azure, gcp, notes in rows %}
+          <tr style="border-bottom: 1px solid var(--border);">
+            <td style="padding: 8px 12px; color: var(--text-secondary); font-family: var(--font-mono); font-size: 12px;">{{ azure }}</td>
+            <td style="padding: 8px 12px; color: var(--accent-light); font-weight: 600; font-family: var(--font-mono); font-size: 12px;">{{ gcp }}</td>
+            <td style="padding: 8px 12px; color: var(--text-dim); font-size: 12px;">{{ notes }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

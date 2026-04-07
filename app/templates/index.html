@@ -6,14 +6,14 @@
   <div class="hero">
     <span class="hero-badge">Proof of Execution</span>
     <h1>Secure Agentic AI Platform<br><span class="accent">on Google Cloud</span></h1>
-    <p>A reference implementation demonstrating rapid GCP ramp-up, secure architecture for regulated environments, and multi-cloud fluency — built for the V2X Senior Principal Agentic Platform Engineer role.</p>
+    <p>A reference implementation demonstrating rapid GCP ramp-up and secure architecture for regulated environments — deployed from GitHub via Cloud Build.</p>
   </div>
 
   <div class="stats-grid">
     <div class="card stat">
-      <div class="stat-value">14</div>
-      <div class="stat-unit">days</div>
-      <div class="stat-label">Ramp-up timeline</div>
+      <div class="stat-value">36</div>
+      <div class="stat-unit">hours</div>
+      <div class="stat-label">Ramp-up time</div>
     </div>
     <div class="card stat">
       <div class="stat-value">6+</div>
@@ -21,40 +21,124 @@
       <div class="stat-label">GCP services integrated</div>
     </div>
     <div class="card stat">
-      <div class="stat-value">3</div>
-      <div class="stat-unit">clouds</div>
-      <div class="stat-label">Azure · AWS · GCP</div>
-    </div>
-    <div class="card stat">
       <div class="stat-value">100%</div>
       <div class="stat-unit">IaC</div>
       <div class="stat-label">Fully automated deploy</div>
     </div>
-  </div>
-
-  <div class="card" style="margin-bottom: 20px;">
-    <div class="card-title">Mission Log Analyzer</div>
-    <div class="card-text">
-      The demo app is a containerized FastAPI service deployed on Cloud Run. Users upload mission log files or documents which are stored in Cloud Storage, then summarized using Gemini 2.5 Flash on Vertex AI. The entire pipeline — build, push, deploy — is automated via Cloud Build with a single <code style="background: var(--accent-dim); padding: 2px 6px; border-radius: 4px; font-size: 12px; color: var(--accent); font-family: var(--font-mono);">cloudbuild.yaml</code>.
-      <br><br>
-      <a href="/analyzer" class="btn btn-primary btn-sm">Try the Analyzer →</a>
+    <div class="card stat">
+      <div class="stat-value">CI/CD</div>
+      <div class="stat-unit">GitHub</div>
+      <div class="stat-label">Push to deploy via Cloud Build</div>
     </div>
   </div>
 
-  <div class="card" style="margin-bottom: 20px;">
-    <div class="card-title">AI Career Assistant</div>
-    <div class="card-text">
-      The chatbot on the "Ask Me Anything" tab is powered by Gemini and loaded with context about my background, skills, and approach. Hiring managers can ask questions about how I'd handle specific scenarios, my architecture philosophy, or my experience with regulated environments.
-      <br><br>
-      <a href="/chat" class="btn btn-outline btn-sm">Ask a Question →</a>
+  <!-- Inline Chat Widget -->
+  <div class="card card-glow" style="margin-bottom: 20px; padding: 0; overflow: hidden;">
+    <div style="padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between;">
+      <div>
+        <div class="card-title" style="margin-bottom: 2px;">Chat with me</div>
+        <div style="font-size: 12px; color: var(--text-dim);">AI assistant · Powered by Gemini on Vertex AI</div>
+      </div>
+      <a href="/chat" class="btn btn-outline btn-sm">Full Chat →</a>
+    </div>
+    <div id="homeChatMessages" style="height: 240px; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 10px;">
+      <div class="chat-msg chat-msg-bot" style="max-width: 88%;">
+        <div class="chat-msg-label">Career AI</div>
+        Hey — ask me anything about Carter's background, skills, or how he'd approach your problems.
+      </div>
+    </div>
+    <div style="padding: 12px 16px; border-top: 1px solid var(--border); display: flex; gap: 10px;">
+      <textarea class="chat-input" id="homeChatInput" rows="1" placeholder="Ask a question..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();homeSend()}" style="flex:1;"></textarea>
+      <button class="btn btn-primary chat-send" id="homeSendBtn" onclick="homeSend()">Send</button>
     </div>
   </div>
 
-  <div class="card">
-    <div class="card-title">Why This Project</div>
-    <div class="card-text">
-      V2X partnered with Google Public Sector in February 2026 to deliver secure AI solutions for U.S. government missions. This project proves I can ramp on GCP quickly, design for compliance (NIST RMF, FedRAMP, CMMC 2.0), and bridge my Azure/AWS experience into GCP's ecosystem.
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 20px;">
+    <div class="card">
+      <div class="card-title">Document Analyzer</div>
+      <div class="card-text">
+        Upload documents for AI-powered summarization using Gemini 2.5 Flash on Vertex AI. Files are stored in Cloud Storage, processed, and summarized automatically.
+        <br><br>
+        <a href="/analyzer" class="btn btn-primary btn-sm">Try the Analyzer →</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Why This Project</div>
+      <div class="card-text">
+        V2X partnered with Google Public Sector in February 2026 to deliver secure AI solutions for U.S. government missions. This project proves I can ramp on GCP quickly and design for compliance — NIST RMF, FedRAMP, CMMC 2.0.
+        <br><br>
+        <a href="/architecture" class="btn btn-outline btn-sm">View Architecture →</a>
+      </div>
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const homeMessages = [];
+const homeChatArea = document.getElementById('homeChatMessages');
+const homeInput = document.getElementById('homeChatInput');
+const homeSendBtn = document.getElementById('homeSendBtn');
+let homeLoading = false;
+
+function homeScrollBottom() { homeChatArea.scrollTop = homeChatArea.scrollHeight; }
+
+function homeAddMsg(role, content) {
+  const div = document.createElement('div');
+  div.className = `chat-msg chat-msg-${role === 'user' ? 'user' : 'bot'}`;
+  div.style.maxWidth = '88%';
+  if (role === 'assistant') {
+    const escaped = document.createElement('div');
+    escaped.textContent = content;
+    div.innerHTML = `<div class="chat-msg-label">Career AI</div>${escaped.innerHTML}`;
+  } else {
+    div.textContent = content;
+  }
+  homeChatArea.appendChild(div);
+  homeScrollBottom();
+}
+
+function homeShowTyping() {
+  const div = document.createElement('div');
+  div.className = 'chat-msg chat-msg-bot';
+  div.id = 'homeTyping';
+  div.style.maxWidth = '88%';
+  div.innerHTML = `<div class="chat-msg-label">Career AI</div><div class="chat-typing"><span></span><span></span><span></span></div>`;
+  homeChatArea.appendChild(div);
+  homeScrollBottom();
+}
+
+async function homeSend() {
+  const msg = homeInput.value.trim();
+  if (!msg || homeLoading) return;
+  homeInput.value = '';
+  homeLoading = true;
+  homeSendBtn.disabled = true;
+  homeMessages.push({ role: 'user', content: msg });
+  homeAddMsg('user', msg);
+  homeShowTyping();
+  try {
+    const resp = await fetch('/chat/message', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: homeMessages })
+    });
+    const data = await resp.json();
+    const el = document.getElementById('homeTyping');
+    if (el) el.remove();
+    homeMessages.push({ role: 'assistant', content: data.reply });
+    homeAddMsg('assistant', data.reply);
+  } catch (err) {
+    const el = document.getElementById('homeTyping');
+    if (el) el.remove();
+    homeAddMsg('assistant', 'Something went wrong. Please try again.');
+  } finally {
+    homeLoading = false;
+    homeSendBtn.disabled = false;
+    homeInput.focus();
+  }
+}
+</script>
 {% endblock %}

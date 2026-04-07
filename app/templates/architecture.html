@@ -5,7 +5,7 @@
 <div class="container">
   <div class="section-header">
     <h2>Reference Architecture</h2>
-    <p>How the Mission Log Analyzer is structured on Google Cloud Platform</p>
+    <p>How the Document Analyzer is structured on Google Cloud Platform</p>
   </div>
 
   <div class="arch-grid">
@@ -15,7 +15,7 @@
         <div>
           <div class="arch-title">Cloud Run</div>
           <div class="arch-subtitle">Frontend + API</div>
-          <div class="arch-desc">Containerized FastAPI serving both the UI and REST endpoints. Auto-scales to zero, pay-per-request. Hosts the analyzer, chatbot, and admin interface.</div>
+          <div class="arch-desc">Containerized FastAPI serving both the UI and REST endpoints. Auto-scales to zero, pay-per-request. Hosts the analyzer, chatbot, and admin interface. Deployed from GitHub via Cloud Build.</div>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@
         <div>
           <div class="arch-title">Cloud Storage</div>
           <div class="arch-subtitle">File + Knowledge Store</div>
-          <div class="arch-desc">Regional bucket with IAM-scoped access. Uploaded mission logs and chatbot knowledge documents are stored here.</div>
+          <div class="arch-desc">Regional bucket with IAM-scoped access. Uploaded documents and chatbot knowledge files are stored here.</div>
         </div>
       </div>
     </div>

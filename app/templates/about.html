@@ -1,0 +1,226 @@
+{% extends "base.html" %}
+{% block title %}About{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div class="hero" style="padding-bottom: 32px;">
+    <h1>Carter Barnes</h1>
+    <p>Cloud & Platform Engineer · 12+ Years · TS Eligible</p>
+    <div style="display: flex; gap: 12px; justify-content: center; margin-top: 20px;">
+      <a href="https://www.linkedin.com/in/carterbarnes-22b490a1" target="_blank" class="btn btn-primary btn-sm">LinkedIn →</a>
+      <a href="https://github.com/carterbarnes" target="_blank" class="btn btn-outline btn-sm">GitHub →</a>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="card" style="margin-bottom: 32px;">
+    <div class="card-text" style="font-size: 15px; line-height: 1.8;">
+      I've spent the last 12+ years working in environments where systems don't get to fail. My background started in the U.S. Air Force supporting global network operations — 860,000+ users across 121 locations. That built a foundation around staying calm under pressure, understanding systems end-to-end, and solving problems at the root. Since then, my work has focused on cloud and platform engineering within regulated government environments. At EY, that means leading the implementation and operation of Azure-based platforms under CMMC and NIST 800-171 constraints — standing up platforms, diagnosing failures across application, identity, and network layers, and stabilizing systems in production.
+    </div>
+  </div>
+
+  <!-- Career Timeline -->
+  <div class="section-header">
+    <h2>Career Timeline</h2>
+  </div>
+
+  <div style="position: relative; padding-left: 28px; margin-bottom: 40px;">
+    <div style="position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(180deg, var(--accent), var(--border));"></div>
+
+    <!-- EY -->
+    <div style="position: relative; margin-bottom: 28px;">
+      <div style="position: absolute; left: -24px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-primary); box-shadow: 0 0 10px var(--accent-glow);"></div>
+      <div class="card" style="padding: 16px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+          <div>
+            <div style="font-size: 16px; font-weight: 700;">Cloud Operations & Platform Engineer</div>
+            <div style="font-size: 14px; color: var(--accent);">Ernst & Young (EY)</div>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">2018 – Present</div>
+        </div>
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+          Lead implementation and operational ownership of enterprise Azure platforms in a regulated government environment (CMMC / NIST 800-171). Own production stability across application configuration, infrastructure, identity, and deployment pipelines. Lead incident triage and high-severity escalation. Build internal reliability tooling. Platforms include EY Canvas and Smart Automation Hub.
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;">
+          <span class="badge badge-info">Azure</span>
+          <span class="badge badge-info">DevOps Pipelines</span>
+          <span class="badge badge-info">Bicep / IaC</span>
+          <span class="badge badge-info">Entra ID</span>
+          <span class="badge badge-info">App Insights / KQL</span>
+          <span class="badge badge-info">CMMC</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booz Allen -->
+    <div style="position: relative; margin-bottom: 28px;">
+      <div style="position: absolute; left: -24px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-primary); box-shadow: 0 0 10px var(--accent-glow);"></div>
+      <div class="card" style="padding: 16px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+          <div>
+            <div style="font-size: 16px; font-weight: 700;">Computer Network Defense Engineer</div>
+            <div style="font-size: 14px; color: var(--accent);">Booz Allen Hamilton</div>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">2017 – 2018</div>
+        </div>
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+          Supported integrated cyber defense operations for DFAS. Maintained secure environments through configuration management, intrusion detection, and incident response. Monitored and responded to cyber events within federal information systems and networks.
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;">
+          <span class="badge badge-info">Cybersecurity</span>
+          <span class="badge badge-info">Incident Response</span>
+          <span class="badge badge-info">Federal / DoD</span>
+          <span class="badge badge-info">Continuous Monitoring</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Air Force -->
+    <div style="position: relative; margin-bottom: 28px;">
+      <div style="position: absolute; left: -24px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg-primary); box-shadow: 0 0 10px var(--accent-glow);"></div>
+      <div class="card" style="padding: 16px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+          <div>
+            <div style="font-size: 16px; font-weight: 700;">Cyber Systems Operator</div>
+            <div style="font-size: 14px; color: var(--accent);">United States Air Force</div>
+          </div>
+          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-dim);">2013 – 2017</div>
+        </div>
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+          Directory and Authentication Services Technician at Langley AFB. Managed 860,000+ users and 121 locations globally. 24/7 mission-critical operations supporting security and intelligence units. Active Directory, Group Policy, domain controller infrastructure, and forensic analysis support. Orchestrated 2017 Cyber Exercise improving tactics across all Air Force cyber units.
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px;">
+          <span class="badge badge-info">Active Directory</span>
+          <span class="badge badge-info">Group Policy</span>
+          <span class="badge badge-info">STIG Compliance</span>
+          <span class="badge badge-info">24/7 Ops</span>
+          <span class="badge badge-info">Top Secret Clearance</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div style="position: relative;">
+      <div style="position: absolute; left: -24px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--text-dim); border: 3px solid var(--bg-primary);"></div>
+      <div class="card" style="padding: 16px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; margin-bottom: 4px;">
+          <div>
+            <div style="font-size: 16px; font-weight: 700;">Education</div>
+          </div>
+        </div>
+        <div style="font-size: 13px; color: var(--text-secondary); line-height: 1.7;">
+          B.A.Sc., Computer/IT Administration & Management — Western Governors University
+          <br>
+          Information Technology — Community College of the Air Force
+          <br>
+          Business Management — IUPUI (in progress)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills Grid -->
+  <div class="section-header">
+    <h2>Technical Skills</h2>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px;">
+
+    <div class="card" style="padding: 20px;">
+      <div style="font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--font-mono);">Cloud & Infrastructure</div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Microsoft Azure</span><span style="color: var(--text-dim);">Production</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 95%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Google Cloud (GCP)</span><span style="color: var(--text-dim);">Ramping</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 45%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Docker / Containers</span><span style="color: var(--text-dim);">Production</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 80%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Kubernetes</span><span style="color: var(--text-dim);">Exposure</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 25%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="padding: 20px;">
+      <div style="font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--font-mono);">DevOps & Automation</div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Azure DevOps Pipelines</span><span style="color: var(--text-dim);">Production</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 95%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Bicep / ARM Templates</span><span style="color: var(--text-dim);">Production</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 85%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Cloud Build / CI/CD</span><span style="color: var(--text-dim);">Project</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 50%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>PowerShell / Scripting</span><span style="color: var(--text-dim);">Production</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 80%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="padding: 20px;">
+      <div style="font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--font-mono);">Identity & Security</div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Entra ID / Azure AD</span><span style="color: var(--text-dim);">Production</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 90%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>OAuth / Managed Identity</span><span style="color: var(--text-dim);">Production</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 85%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>CMMC / NIST 800-171</span><span style="color: var(--text-dim);">Production</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 80%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>RMF / ATO Contributions</span><span style="color: var(--text-dim);">Supporting</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 60%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="padding: 20px;">
+      <div style="font-size: 13px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; font-family: var(--font-mono);">Observability & Reliability</div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Application Insights / KQL</span><span style="color: var(--text-dim);">Production</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 90%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Incident Triage / Escalation</span><span style="color: var(--text-dim);">Production</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 90%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Cloud Logging / Monitoring</span><span style="color: var(--text-dim);">Project</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 45%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+        <div>
+          <div style="display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 4px;"><span>Root Cause Analysis</span><span style="color: var(--text-dim);">Production</span></div>
+          <div style="height: 4px; background: var(--border); border-radius: 2px;"><div style="height: 100%; width: 90%; background: var(--accent); border-radius: 2px;"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Clearance -->
+  <div class="card card-glow" style="text-align: center; padding: 20px;">
+    <div style="font-size: 14px; font-weight: 600;">Security Clearance: <span style="color: var(--accent);">Top Secret Eligible</span></div>
+    <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">Previously held TS clearance · U.S. Air Force veteran</div>
+  </div>
+
+</div>
+{% endblock %}

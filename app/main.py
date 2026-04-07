@@ -170,27 +170,23 @@ def chat_with_gemini(messages: list, knowledge: str) -> str:
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "active": "home"})
-
+    return templates.TemplateResponse(request, "index.html", {"active": "home"})
 
 @app.get("/architecture", response_class=HTMLResponse)
 async def architecture(request: Request):
-    return templates.TemplateResponse("architecture.html", {"request": request, "active": "architecture"})
-
+    return templates.TemplateResponse(request, "architecture.html", {"active": "architecture"})
 
 @app.get("/analyzer", response_class=HTMLResponse)
 async def analyzer(request: Request):
-    return templates.TemplateResponse("analyzer.html", {"request": request, "active": "analyzer"})
-
+    return templates.TemplateResponse(request, "analyzer.html", {"active": "analyzer"})
 
 @app.get("/chat", response_class=HTMLResponse)
 async def chat_page(request: Request):
-    return templates.TemplateResponse("chat.html", {"request": request, "active": "chat"})
-
+    return templates.TemplateResponse(request, "chat.html", {"active": "chat"})
 
 @app.get("/admin", response_class=HTMLResponse)
 async def admin_page(request: Request):
-    return templates.TemplateResponse("admin.html", {"request": request, "active": "admin"})
+    return templates.TemplateResponse(request, "admin.html", {"active": "admin"})
 
 
 # ─── API ROUTES ───

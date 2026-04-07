@@ -170,27 +170,23 @@ def chat_with_gemini(messages: list, knowledge: str) -> str:
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "active": "home"})
-
+    return templates.TemplateResponse(name="index.html", request=request, context={"active": "home"})
 
 @app.get("/architecture", response_class=HTMLResponse)
 async def architecture(request: Request):
-    return templates.TemplateResponse("architecture.html", {"request": request, "active": "architecture"})
-
+    return templates.TemplateResponse(name="architecture.html", request=request, context={"active": "architecture"})
 
 @app.get("/analyzer", response_class=HTMLResponse)
 async def analyzer(request: Request):
-    return templates.TemplateResponse("analyzer.html", {"request": request, "active": "analyzer"})
-
+    return templates.TemplateResponse(name="analyzer.html", request=request, context={"active": "analyzer"})
 
 @app.get("/chat", response_class=HTMLResponse)
 async def chat_page(request: Request):
-    return templates.TemplateResponse("chat.html", {"request": request, "active": "chat"})
-
+    return templates.TemplateResponse(name="chat.html", request=request, context={"active": "chat"})
 
 @app.get("/admin", response_class=HTMLResponse)
 async def admin_page(request: Request):
-    return templates.TemplateResponse("admin.html", {"request": request, "active": "admin"})
+    return templates.TemplateResponse(name="admin.html", request=request, context={"active": "admin"})
 
 
 # ─── API ROUTES ───

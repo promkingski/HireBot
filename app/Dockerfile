@@ -7,6 +7,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . ./
 
-ENV BUCKET_NAME=cblabs-dev-sbkt01
+ENV BUCKET_NAME=your-gcs-bucket-name
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
